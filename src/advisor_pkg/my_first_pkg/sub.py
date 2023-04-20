@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 
 from std_msgs.msg import String
+from mavros_msgs.msg import WaypointList
 
 
 class MinimalSubscriber(Node):
@@ -9,14 +10,16 @@ class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
-            String,
-            '/new_topic',
+            WaypointList,
+            '/mavros/mission/waypoints',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        self.get_logger().info(f'I heard: {msg.data}')
+        for wayPoint in msg.waypoints:
+            self.get_logger().info(f'I heard:\nlat:{wayPoint.x_lat}\nlong:{wayPoint.y_long}')
+        
 
 
 def main(args=None):
