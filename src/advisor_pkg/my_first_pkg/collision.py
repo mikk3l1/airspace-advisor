@@ -98,7 +98,7 @@ def get_advise(aircraft_dict, drone_dict):
     advise = ''
     for aircraft in aircraft_dict:
         if aircraft_dict.get(aircraft).get('lat') == None and aircraft_dict.get(aircraft).get('lon') == None:
-            advise += f'{aircraft_dict.get(aircraft).get(name)} is missing latitude and longitude'
+            advise += f'{aircraft_dict.get(aircraft).get("flight")} is missing latitude and longitude\n'
         else:
             advise += calculate_new_coordinates(aircraft_dict.get(aircraft), drone_dict)
     return advise
