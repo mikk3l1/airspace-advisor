@@ -18,7 +18,9 @@ class MinimalSubscriber(Node):
 
     def listener_callback(self, msg):
         for wayPoint in msg.waypoints:
+            print(wayPoint)
             self.get_logger().info(f'I heard:\nlat:{wayPoint.x_lat}\nlong:{wayPoint.y_long}')
+        print('----------------------------------------------')
         
 
 

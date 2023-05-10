@@ -19,6 +19,7 @@ def calculate_new_coordinates(aircraft_dict: dict, drone_dict: dict, time: int=6
     # Aircraft calculations
     # Setting the aircraft variables from the aircraft dict
     aircraft_name = aircraft_dict.get('flight')
+    print(aircraft_name)
     aircraft_lat = float(aircraft_dict.get('lat'))
     aircraft_lon = float(aircraft_dict.get('lon'))
     aircraft_alt = aircraft_dict.get('baro_alt')
@@ -29,6 +30,7 @@ def calculate_new_coordinates(aircraft_dict: dict, drone_dict: dict, time: int=6
     aircraft_speed_kms = aircraft_speed * 1.852 / 3600
 
     # Convert the initial direction to a bearing
+    print(aircraft_track)
     aircraft_bearing = math.radians(90) - math.radians(aircraft_track)
 
     # Calculate the distance traveled by the plane

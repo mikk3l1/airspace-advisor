@@ -24,6 +24,7 @@ setup(
             'listener = my_first_pkg.subscriber:main',
             'advisor = my_first_pkg.mavros_drone_info:main',
             'test_sub = my_first_pkg.sub:main',
+            'collision_test_node = my_first_pkg.collision_advisor:main',
         ],
     },
 )

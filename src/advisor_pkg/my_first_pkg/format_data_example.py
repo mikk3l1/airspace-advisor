@@ -14,6 +14,9 @@ def data_to_publish(json_str):
         aircraft_list = traffic.get('aircraft')
         # Iterate over each aircraft from the JSON object
         for aircraft in aircraft_list:
+            # Remove aircraft that dont have 'flight', 'lat', 'lon', 'track'
+            if not aircraft.keys() >= {'flight', 'lat', 'lon', 'track'}:
+                continue
             # Find each aircrafts name using the 'flight' key
             flight_name = aircraft['flight']
             # Add the aircraft to a dict to keep the track of each of them
@@ -26,7 +29,7 @@ def data_to_publish(json_str):
 
 if __name__ == "__main__":
     json_object = json.loads(json_post.get_data(json_post.post_url, json_post.post_id_token))
-    json_string = json.dumps(json_object, indent=1)
+    json_string = json.dumps(json_object, indent = 1)
     
 
     print(data_to_publish(json_string))
