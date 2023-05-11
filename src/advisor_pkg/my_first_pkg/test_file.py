@@ -34,23 +34,25 @@ Should be deleted
 # print(new_list[0])
 # print(new_list[1])
 
-b1 = True
-b2 = False
-b3 = True
-b4 = True
+# b1 = True
+# b2 = False
+# b3 = True
+# b4 = True
 
-if all([b1,b2,b3,b4]):
-    print('all True')
-else:
-    print('one or more is False')
+# if all([b1,b2,b3,b4]):
+#     print('all True')
+# else:
+#     print('one or more is False')
 
 
 
-sports = {"geeksforgeeks" : 1, "practice" : 2, "contribute" :3}
+# sports = {"geeksforgeeks" : 1, "practice" : 2, "contribute" :3}
  
-# using comparison operator
-print(sports.keys() >= {"geeksforgeeks", "practice"}, '1')
-print(sports.keys() >= {"contribute", "ide"}, '2')
+# # using comparison operator
+# print(sports.keys() >= {"geeksforgeeks", "practice"}, '1')
+# print(sports.keys() >= {"contribute", "ide"}, '2')
+
+
 
 if __name__ == "__main__":
 
@@ -101,11 +103,22 @@ if __name__ == "__main__":
         "track": 122
     }
     }
-    for aircraft in dict1:
-        if dict1[aircraft].keys() >= {'flight', 'lat', 'lon', 'track'}:
-            print(dict1[aircraft], 'is GREAT!')
-        else:
-            print(dict1[aircraft], 'dont not meet standard')
+    # for aircraft in dict1:
+    #     print(dict1[aircraft]['baro_alt'])
+    #     print(dict1[aircraft].get('baro_alt'))
+
+
+
+    #     n = len(dict1[aircraft])
+    #     print(n)
+    #     first_n_values = list(dict1[aircraft].values())[:n]
+
+    #     print(first_n_values)  
+
+        # if dict1[aircraft].keys() >= {'flight', 'lat', 'lon', 'track'}:
+        #     print(dict1[aircraft], 'is GREAT!')
+        # else:
+        #     print(dict1[aircraft], 'dont not meet standard')
     #         print(aircraft, 'dont have flight, lat, lon, or track')
     #     else:
     #         print('we good')
@@ -113,3 +126,18 @@ if __name__ == "__main__":
         #     print('no flight')
         # else:
         #     print(dict1[aircraft])
+
+
+    str1 = ''
+
+    if str1:
+        print('here')
+
+    str2 = 'hello'
+    str3 = 'world'
+
+    str1 = f'{str2} {str3}'
+
+    if str1:
+        print('here2')
+    print(str1)

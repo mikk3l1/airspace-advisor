@@ -75,25 +75,16 @@ class CollisionSubscriber(Node):
     def publish_to_advisor_thread(self):
         msg = String()
 
-        # Check if drone dict or air traffic dict is empty
-        # if not self.air_traffic_dict:
-        #     print('Lacks infomation from air traffic')
-        # if not self.drone_dict:
-        #     print('Lacks infomation from Drone')
-        
-        # TODO call the calc_collision on mission with every aircraft from the air traffic list
-        # print('hej', self.air_traffic_dict, '\nhej')
-        # print(self.waypoints_list)
         if self.air_traffic_dict and self.waypoints_list:
             mission_collision = calc_mission_collision(self.waypoints_list, self.air_traffic_dict)
             post_test['level'] = mission_collision[0]
             post_test['text'] = mission_collision[1]
             get_data(post_url, post_test)
-        # else:
-        #     if self.air_traffic_dict:
-        #         print('air_traffic_dict is empty')
-        #     else:
-        #         print('self.waypoints_list is empty')
+        else:
+            if self.air_traffic_dict:
+                print('air_traffic_dict is empty')
+            else:
+                print('self.waypoints_list is empty')
 
         if self.air_traffic_dict and self.drone_dict:
             aircraft_collision = calc_drone_aircraft_collision(self.drone_dict,self.air_traffic_dict)

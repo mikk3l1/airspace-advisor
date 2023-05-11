@@ -15,7 +15,7 @@ def data_to_publish(json_str):
         # Iterate over each aircraft from the JSON object
         for aircraft in aircraft_list:
             # Remove aircraft that dont have 'flight', 'lat', 'lon', 'track'
-            if not aircraft.keys() >= {'flight', 'lat', 'lon', 'track'}:
+            if not aircraft.keys() >= {'flight', 'lat', 'lon', 'track', 'speed'}:
                 continue
             # Find each aircrafts name using the 'flight' key
             flight_name = aircraft['flight']

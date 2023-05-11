@@ -14,6 +14,7 @@ from .collision import test_me
 from .collision import json_to_dict
 from .collision import calculate_new_coordinates
 from .col_test import get_new_coordinates
+from .col_test import calculate_new_coordinates_using_nautical_miles
 from .collision import get_advise
 
 
@@ -98,7 +99,8 @@ class MinimalSubscriber(Node):
         for entry in self.air_traffic:
             if self.air_traffic[entry].get('lat') == None:
                 continue
-            self.air_traffic[entry]['new_coordinates'] = get_new_coordinates(self.air_traffic[entry])
+            # self.air_traffic[entry]['new_coordinates'] = get_new_coordinates(self.air_traffic[entry])
+            self.air_traffic[entry]['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.air_traffic[entry])
 
         msg.data = json.dumps(self.air_traffic, indent=1)
         self.air_traffic_new_coordinates_publisher.publish(msg)
@@ -107,7 +109,8 @@ class MinimalSubscriber(Node):
     def publish_drone_new_coordinates(self):
         msg = String()
 
-        self.drone_info['new_coordinates'] = get_new_coordinates(self.drone_info)
+        # self.drone_info['new_coordinates'] = get_new_coordinates(self.drone_info)
+        self.drone_info['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.drone_info)
 
         msg.data = json.dumps(self.drone_info, indent=1)
         self.drone_new_coordinates_publisher.publish(msg)
