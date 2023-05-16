@@ -17,7 +17,7 @@ from .advisor_log_text_req import post_url
 class CollisionSubscriber(Node):
 
     def __init__(self):
-        super().__init__('collision_subscriber')
+        super().__init__('Advisor_Node')
         
         # Subscriber to get the drones mission waypoints
         self.WaypointList_subscription = self.create_subscription(
@@ -91,11 +91,11 @@ class CollisionSubscriber(Node):
             post_test['level'] = aircraft_collision[0]
             post_test['text'] = aircraft_collision[1]
             get_data(post_url, post_test)
-        # else:
-        #     if self.air_traffic_dict:
-        #         print('air_traffic_dict is empty')
-        #     else:
-        #         print('self.drone_dict is empty')
+        else:
+            if not self.air_traffic_dict:
+                print('air_traffic_dict is empty')
+            else:
+                print('self.drone_dict is empty')
 
 
 
