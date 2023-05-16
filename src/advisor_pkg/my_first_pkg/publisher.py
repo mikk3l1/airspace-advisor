@@ -11,7 +11,7 @@ from .aircraft_json_post_example import get_data, post_id_token, post_url
 class AirTrafficPublisher(Node):
 
     def __init__(self):
-        super().__init__('air_traffic_publisher')
+        super().__init__('air_traffic_format_node')
         self.publisher_ = self.create_publisher(String, 'air_traffic', 10)
         timer_period = 1  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
@@ -23,7 +23,7 @@ class AirTrafficPublisher(Node):
         msg = String()
         msg.data = data_to_publish(json_string)
         self.publisher_.publish(msg)
-        self.get_logger().info(f'Publishing: \n{msg.data}')      
+        self.get_logger().info(f'Publishing airtraffic: \n{msg.data}')      
 
 
 def main(args=None):

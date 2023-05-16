@@ -5,8 +5,8 @@ import json
 
 from std_msgs.msg import String
 from mavros_msgs.msg import WaypointList
-from .calc_collision import calc_mission_collision
-from .calc_collision import calc_drone_aircraft_collision
+from .calculate_collision_risk import calc_mission_collision
+from .calculate_collision_risk import calc_drone_aircraft_collision
 
 from .advisor_log_text_req import get_data
 from .advisor_log_text_req import post_test
@@ -87,6 +87,7 @@ class CollisionSubscriber(Node):
                 print('self.waypoints_list is empty')
 
         if self.air_traffic_dict and self.drone_dict:
+            print(self.drone_dict)
             aircraft_collision = calc_drone_aircraft_collision(self.drone_dict,self.air_traffic_dict)
             post_test['level'] = aircraft_collision[0]
             post_test['text'] = aircraft_collision[1]

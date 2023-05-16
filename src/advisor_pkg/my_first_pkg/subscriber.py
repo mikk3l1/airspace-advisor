@@ -10,17 +10,17 @@ from mavros_msgs.msg import GPSRAW
 import json
 
 # Created python modules
-from .collision import test_me
-from .collision import json_to_dict
-from .collision import calculate_new_coordinates
-from .col_test import get_new_coordinates
-from .col_test import calculate_new_coordinates_using_nautical_miles
-from .collision import get_advise
+# from .collision import test_me
+# from .collision import json_to_dict
+# from .collision import calculate_new_coordinates
+# from .calculate_new_coordinates import get_new_coordinates
+from .calculate_new_coordinates import calculate_new_coordinates_using_nautical_miles
+# from .collision import get_advise
 
 
 class MinimalSubscriber(Node):
     def __init__(self):
-        super().__init__('subscriber_py')
+        super().__init__('new_coordinates_node')
         # Subscriber to get current air traffic over Fyn
         self.air_traffic_subscription = self.create_subscription(
             String,
@@ -132,5 +132,5 @@ def main(args=None):
 
 
 if __name__ == '__main__':
-    test_me()
+    # test_me()
     main()
