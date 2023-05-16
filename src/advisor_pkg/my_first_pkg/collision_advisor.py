@@ -81,7 +81,7 @@ class CollisionSubscriber(Node):
             post_test['text'] = mission_collision[1]
             get_data(post_url, post_test)
         else:
-            if self.air_traffic_dict:
+            if not self.air_traffic_dict:
                 print('air_traffic_dict is empty')
             else:
                 print('self.waypoints_list is empty')

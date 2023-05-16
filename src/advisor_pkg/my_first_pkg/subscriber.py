@@ -20,7 +20,7 @@ from .collision import get_advise
 
 class MinimalSubscriber(Node):
     def __init__(self):
-        super().__init__('subscriber_DOT_py')
+        super().__init__('subscriber_py')
         # Subscriber to get current air traffic over Fyn
         self.air_traffic_subscription = self.create_subscription(
             String,
