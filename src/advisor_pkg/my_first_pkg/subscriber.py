@@ -57,7 +57,7 @@ class MinimalSubscriber(Node):
         )
         self.drone_velocity_subscription  # prevent unused variable warning
 
-        self.advise_publisher = self.create_publisher(String, '/advise', 10)
+        # self.advise_publisher = self.create_publisher(String, '/advise', 10)
         self.air_traffic_new_coordinates_publisher = self.create_publisher(String, '/air_traffic_new_coordinates', 10)
         self.drone_new_coordinates_publisher = self.create_publisher(String, '/drone_new_coordinates', 10)
 
@@ -65,7 +65,7 @@ class MinimalSubscriber(Node):
         # self.air_traffic = {}
 
         # Timer to publish every 2 seconds
-        self.advise_timer = self.create_timer(2.0, self.publish_advise)
+        # self.advise_timer = self.create_timer(2.0, self.publish_advise)
         self.air_traffic_new_coordinates_timer = self.create_timer(2.0, self.publish_air_traffic_new_coordinates)
         self.drone_new_coordinates_timer = self.create_timer(2.0, self.publish_drone_new_coordinates)
 
@@ -88,11 +88,11 @@ class MinimalSubscriber(Node):
         self.drone_info['track'] = compass_hdg_msg.data
 
     # This is the old advise(r)
-    def publish_advise(self):
-        msg = String()
-        msg.data = get_advise(self.air_traffic, self.drone_info)
-        self.advise_publisher.publish(msg)
-        self.get_logger().info(f'Publishing advise: \n{msg.data}')
+    # def publish_advise(self):
+    #     msg = String()
+    #     msg.data = get_advise(self.air_traffic, self.drone_info)
+    #     self.advise_publisher.publish(msg)
+    #     self.get_logger().info(f'Publishing advise: \n{msg.data}')
 
     def publish_air_traffic_new_coordinates(self):
         msg = String()

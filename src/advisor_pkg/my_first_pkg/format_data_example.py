@@ -2,8 +2,8 @@ import json
 # import state_test
 # import aircraft_json_post_example as json_post
 
-# current_state = state_test.AirTrafficAdvisory()
 
+# Consider to create a time stamp here to use for testing
 
 def data_to_publish(json_str):
     flight_dict = {}
@@ -14,7 +14,7 @@ def data_to_publish(json_str):
         aircraft_list = traffic.get('aircraft')
         # Iterate over each aircraft from the JSON object
         for aircraft in aircraft_list:
-            # Remove aircraft that dont have 'flight', 'lat', 'lon', 'track'
+            # Skip over aircraft that dont have 'flight', 'lat', 'lon', 'track', 'speed' keys
             if not aircraft.keys() >= {'flight', 'lat', 'lon', 'track', 'speed'}:
                 continue
             # Find each aircrafts name using the 'flight' key
