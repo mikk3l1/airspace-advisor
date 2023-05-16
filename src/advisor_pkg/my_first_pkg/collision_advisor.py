@@ -86,8 +86,7 @@ class CollisionSubscriber(Node):
             else:
                 print('self.waypoints_list is empty')
 
-        if self.air_traffic_dict and self.drone_dict:
-            print(self.drone_dict)
+        if self.air_traffic_dict and self.drone_dict and self.drone_dict['speed'] > 1:
             aircraft_collision = calc_drone_aircraft_collision(self.drone_dict,self.air_traffic_dict)
             post_test['level'] = aircraft_collision[0]
             post_test['text'] = aircraft_collision[1]
@@ -96,7 +95,7 @@ class CollisionSubscriber(Node):
             if not self.air_traffic_dict:
                 print('air_traffic_dict is empty')
             else:
-                print('self.drone_dict is empty')
+                print('self.drone_dict is empty or drone is flying too slow')
 
 
 

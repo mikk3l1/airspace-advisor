@@ -12,8 +12,10 @@ def calc_mission_collision(mission_waypoints: list, air_traffic_dict: dict) -> l
 
     for aircraft in air_traffic_dict:
         aircraft_new_coordinates_list = air_traffic_dict[aircraft]['new_coordinates'].get('60.0')
+
     
         for index, waypoint in enumerate(mission_waypoints[0:len(mission_waypoints)-1]):
+            
             waypoint_aircraft_distance_dict[aircraft] = distance_between_objects(waypoint[0:2], aircraft_new_coordinates_list[0:2])
 
         # FFA well-clear
@@ -32,7 +34,7 @@ def calc_drone_aircraft_collision(drone_dict: dict, air_traffic_dict: dict) -> l
     drone_new_coordinates_lat_long = drone_dict['new_coordinates'].get('60.0')
 
     for aircraft in air_traffic_dict:
-
+        print(aircraft)
         aircraft_new_coordinates_list_lat_long = air_traffic_dict[aircraft]['new_coordinates'].get('60.0')
 
         distance_between_drone_aircraft = distance_between_objects(drone_new_coordinates_lat_long[0:2], aircraft_new_coordinates_list_lat_long[0:2])
