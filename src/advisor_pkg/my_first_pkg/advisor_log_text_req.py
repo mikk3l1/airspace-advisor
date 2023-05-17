@@ -12,7 +12,7 @@ from time import time
 
 # parameters
 post_url = 'https://droneweb.dk/daa/fyn/advisor/advisor_log_text.php'
-post_test = { 'id': 'Mikkel', 'token': 'a244ac96', 'level' : 'error', 'text': 'This is a test'}
+post_test = { 'id': 'Mikkel', 'token': 'a244ac96', 'level' : 'info', 'text': 'This is a test'}
 
 def get_data(post_url, post_data):
 

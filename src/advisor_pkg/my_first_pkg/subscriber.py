@@ -97,8 +97,8 @@ class MinimalSubscriber(Node):
     def publish_air_traffic_new_coordinates(self):
         msg = String()
         for entry in self.air_traffic:
-            if self.air_traffic[entry].get('lat') == None:
-                continue
+            # if self.air_traffic[entry].get('lat') == None:
+            #     continue
             # self.air_traffic[entry]['new_coordinates'] = get_new_coordinates(self.air_traffic[entry])
             self.air_traffic[entry]['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.air_traffic[entry])
 

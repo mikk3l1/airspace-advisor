@@ -17,7 +17,7 @@ from .advisor_log_text_req import post_url
 class CollisionSubscriber(Node):
 
     def __init__(self):
-        super().__init__('Advisor_Node')
+        super().__init__('advisor_node')
         
         # Subscriber to get the drones mission waypoints
         self.WaypointList_subscription = self.create_subscription(
@@ -79,6 +79,7 @@ class CollisionSubscriber(Node):
             mission_collision = calc_mission_collision(self.waypoints_list, self.air_traffic_dict)
             post_test['level'] = mission_collision[0]
             post_test['text'] = mission_collision[1]
+            print(f'Mission:\nPOST to {post_url} with {post_test}')
             get_data(post_url, post_test)
         else:
             if not self.air_traffic_dict:
@@ -90,6 +91,7 @@ class CollisionSubscriber(Node):
             aircraft_collision = calc_drone_aircraft_collision(self.drone_dict,self.air_traffic_dict)
             post_test['level'] = aircraft_collision[0]
             post_test['text'] = aircraft_collision[1]
+            print(f'Drone-Aircraft:\nPOST to {post_url} with {post_test}')
             get_data(post_url, post_test)
         else:
             if not self.air_traffic_dict:
