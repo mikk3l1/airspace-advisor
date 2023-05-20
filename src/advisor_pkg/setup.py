@@ -13,18 +13,16 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='mikkel',
-    maintainer_email='mikkel@todo.todo',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer='Mikkel',
+    maintainer_email='mihoe18@student.sdu.dk',
+    description='Airspace advisor for Airtrack',
+    license='MIT License',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'talker = my_first_pkg.publisher:main',
             'listener = my_first_pkg.subscriber:main',
-            'advisor = my_first_pkg.mavros_drone_info:main',
-            'test_sub = my_first_pkg.sub:main',
-            'collision_test_node = my_first_pkg.collision_advisor:main',
+            'collision_advisor = my_first_pkg.collision_advisor:main',
         ],
     },
 )

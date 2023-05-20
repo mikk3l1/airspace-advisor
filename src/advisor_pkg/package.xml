@@ -3,9 +3,9 @@
 <package format="3">
   <name>my_first_pkg</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="mikkel@todo.todo">mikkel</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Airspace advisor for Airtrack</description>
+  <maintainer email="mihoe18@student.sdu.dk">Mikkel</maintainer>
+  <license>MIT License</license>
   
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
