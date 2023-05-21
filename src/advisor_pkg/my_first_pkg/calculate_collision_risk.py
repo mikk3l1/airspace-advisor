@@ -46,7 +46,6 @@ def calc_drone_aircraft_collision(drone_dict: dict, air_traffic_dict: dict) -> l
         # FFA well-clear
         # 2_000 ft horizontal (0.6096 kilometer / 609,6 meter)
         # 600 ft vertical (0,18288 kilometer / 182.88 meter)
-        print(distance_between_drone_aircraft)
         if distance_between_drone_aircraft < 1 and altitude_between_drone_aircraft < 200:
             drone_aircraft_collision += f'{aircraft},'
 
