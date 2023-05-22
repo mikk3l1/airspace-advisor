@@ -128,16 +128,23 @@ if __name__ == "__main__":
         #     print(dict1[aircraft])
 
 
-    str1 = ''
+    # str1 = ''
 
-    if str1:
-        print('here')
+    # if str1:
+    #     print('here')
 
-    str2 = 'hello'
-    str3 = 'world'
+    # str2 = 'hello'
+    # str3 = 'world'
 
-    str1 = f'{str2} {str3}'
+    # str1 = f'{str2} {str3}'
 
-    if str1:
-        print('here2')
-    print(str1)
+    # if str1:
+    #     print('here2')
+    # print(str1)
+
+    aircraft = {'1': 1, '2': 2}
+
+    if aircraft.get('flight'):
+        print('true?')
+    else:
+        print(bool(aircraft.get('flight')))

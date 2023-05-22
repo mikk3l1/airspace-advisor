@@ -82,20 +82,27 @@ class MinimalSubscriber(Node):
 
     def publish_air_traffic_new_coordinates(self):
         msg = String()
-        for entry in self.air_traffic:
-            self.air_traffic[entry]['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.air_traffic[entry])
+        if self.air_traffic:
+            for entry in self.air_traffic:
+                self.air_traffic[entry]['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.air_traffic[entry])
 
-        msg.data = json.dumps(self.air_traffic, indent=1)
-        self.air_traffic_new_coordinates_publisher.publish(msg)
-        self.get_logger().info(f'Publishing air traffic with new coordinates:\n{msg.data}')
+            msg.data = json.dumps(self.air_traffic, indent=1)
+            self.air_traffic_new_coordinates_publisher.publish(msg)
+            self.get_logger().info(f'Publishing air traffic with new coordinates:\n{msg.data}')
+        else:
+            print('airspace empty')
 
     def publish_drone_new_coordinates(self):
         msg = String()
-        self.drone_info['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.drone_info)
+        if self.drone_info:
+            self.drone_info['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.drone_info)
+            msg.data = json.dumps(self.drone_info, indent=1)
+            self.drone_new_coordinates_publisher.publish(msg)
+            self.get_logger().info(f'Publishing drone_info with new coordinates:\n{msg.data}')
+        else:
+            print('drone info available')
 
-        msg.data = json.dumps(self.drone_info, indent=1)
-        self.drone_new_coordinates_publisher.publish(msg)
-        self.get_logger().info(f'Publishing drone_info with new coordinates:\n{msg.data}')
+        
 
 
 def main(args=None):

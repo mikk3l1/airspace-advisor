@@ -11,6 +11,12 @@ def test_valid_json_str():
     result = data_to_publish(json_str)
     assert result == expected_result
 
+def test_valid_json_str_flarm():
+    json_str = '{"aircraft": [{"flarm_id": "ABC123", "lat": 1.234, "lon": 5.678, "track": 90, "speed": 300}]}'
+    expected_result = '{"ABC123": {"flarm_id": "ABC123", "lat": 1.234, "lon": 5.678, "track": 90, "speed": 300}}'
+    result = data_to_publish(json_str)
+    assert result == expected_result
+
 def test_invalid_json_str():
     json_str = '{"aircraft": [{"flight": "ABC123", "lat": 1.234}]}'
     expected_result = '{}'

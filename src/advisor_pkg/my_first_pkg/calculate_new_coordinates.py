@@ -13,9 +13,10 @@ def distance_between_objects(aircraft_lat_lon: list, drone_lat_lon: list) -> flo
     return  geopy.distance.great_circle(aircraft_lat_lon, drone_lat_lon).km
     
 
-
 def calculate_new_coordinates_using_nautical_miles(aircraft: dict, time: float = 60.0):
     # Extract inputs from dictionary
+    print(aircraft)
+    print(aircraft.get('lat'))
     lat = float(aircraft['lat'])
     lon = float(aircraft['lon'])
 
