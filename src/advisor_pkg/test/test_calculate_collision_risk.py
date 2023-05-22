@@ -55,7 +55,6 @@ def test_calc_mission_collision_without_collision():
     assert result == expected
 
 
-
 def test_calc_drone_aircraft_collision_with_collision():
     drone_dict = {
         'new_coordinates': {

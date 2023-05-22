@@ -13,18 +13,12 @@ def calc_mission_collision(mission_waypoints: list, air_traffic_dict: dict) -> l
     for aircraft in air_traffic_dict:
         aircraft_new_coordinates_list = air_traffic_dict[aircraft]['new_coordinates'].get('60.0')
 
-    
         for index, waypoint in enumerate(mission_waypoints[0:len(mission_waypoints)-1]):
-            
             waypoint_aircraft_distance_dict[aircraft] = distance_between_objects(waypoint[0:2], aircraft_new_coordinates_list[0:2])
 
         # FFA well-clear
         # 2_000 ft horizontal (0.6096 km)
         # 600 ft vertical (182.88 meter)
-
-        # print(waypoint_aircraft_distance_dict)
-        # print(abs(waypoint[2]-aircraft_new_coordinates_list[2]))
-        # print(any( i < 1 for i in waypoint_aircraft_distance_dict.values()))
         if any( i < 1 for i in waypoint_aircraft_distance_dict.values()) and abs(waypoint[2]-aircraft_new_coordinates_list[2]) < 200:
             waypoint_aircraft_collision += f'{aircraft},'
 
