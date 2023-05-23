@@ -5,6 +5,13 @@ Simple python scripts and other stuff
 Should be deleted
 '''
 
+
+import os
+import sys
+import time
+
+
+
 # my_list = ['p','r','o','g','r','a','m','i','z','s']
 
 # print(len(my_list))
@@ -56,53 +63,53 @@ Should be deleted
 
 if __name__ == "__main__":
 
-    dict1 = {"SAS1523": {
-        "baro_alt": 38025,
-        "flight": "SAS1523",
-        "gnss_alt": 0,
-        "icao_id": "4AC9F0",
-        "lon": "9.93479",
-        "seen": 0.505,
-        "sim": "false",
-        "source_name": "Unknown",
-        "source_type": "ADSB",
-        "speed": 404,
-        "target_dir": 237,
-        "target_dist": 29444,
-        "track": 231
-    },
-        "SAS2987": {
-        "baro_alt": 16998,
-        "flight": "SAS2987",
-        "gnss_alt": 0,
-        "icao_id": "511101",
-        "lat": "56.13185",
-        "lon": "10.30432",
-        "seen": 1.505,
-        "sim": "false",
-        "source_name": "OUH2",
-        "source_type": "ADSB",
-        "speed": 299,
-        "target_dir": 359,
-        "target_dist": 73015,
-        "track": 151
-    },
-        "VKG504": {
-        "baro_alt": 14948,
-        "gnss_alt": 0,
-        "icao_id": "45D964",
-        "lat": "55.38199",
-        "lon": "10.28087",
-        "seen": 0.505,
-        "sim": "false",
-        "source_name": "HCA",
-        "source_type": "ADSB",
-        "speed": 408,
-        "target_dir": 196,
-        "target_dist": 10777,
-        "track": 122
-    }
-    }
+    # dict1 = {"SAS1523": {
+    #     "baro_alt": 38025,
+    #     "flight": "SAS1523",
+    #     "gnss_alt": 0,
+    #     "icao_id": "4AC9F0",
+    #     "lon": "9.93479",
+    #     "seen": 0.505,
+    #     "sim": "false",
+    #     "source_name": "Unknown",
+    #     "source_type": "ADSB",
+    #     "speed": 404,
+    #     "target_dir": 237,
+    #     "target_dist": 29444,
+    #     "track": 231
+    # },
+    #     "SAS2987": {
+    #     "baro_alt": 16998,
+    #     "flight": "SAS2987",
+    #     "gnss_alt": 0,
+    #     "icao_id": "511101",
+    #     "lat": "56.13185",
+    #     "lon": "10.30432",
+    #     "seen": 1.505,
+    #     "sim": "false",
+    #     "source_name": "OUH2",
+    #     "source_type": "ADSB",
+    #     "speed": 299,
+    #     "target_dir": 359,
+    #     "target_dist": 73015,
+    #     "track": 151
+    # },
+    #     "VKG504": {
+    #     "baro_alt": 14948,
+    #     "gnss_alt": 0,
+    #     "icao_id": "45D964",
+    #     "lat": "55.38199",
+    #     "lon": "10.28087",
+    #     "seen": 0.505,
+    #     "sim": "false",
+    #     "source_name": "HCA",
+    #     "source_type": "ADSB",
+    #     "speed": 408,
+    #     "target_dir": 196,
+    #     "target_dist": 10777,
+    #     "track": 122
+    # }
+    # }
     # for aircraft in dict1:
     #     print(dict1[aircraft]['baro_alt'])
     #     print(dict1[aircraft].get('baro_alt'))
@@ -142,9 +149,21 @@ if __name__ == "__main__":
     #     print('here2')
     # print(str1)
 
-    aircraft = {'1': 1, '2': 2}
+    # aircraft = {'1': 1, '2': 2}
 
-    if aircraft.get('flight'):
-        print('true?')
-    else:
-        print(bool(aircraft.get('flight')))
+    # if aircraft.get('flight'):
+    #     print('true?')
+    # else:
+    #     print(bool(aircraft.get('flight')))
+
+    # os.path.join(file_path, os.pardir, "my_first_pkg", "publisher.py")
+
+    path = os.getcwd()
+    print("Current Directory:", path)
+
+    parent = os.path.join(path, os.pardir)
+    print(parent)
+  
+    # prints parent directory
+    print("\nParent Directory:", os.path.abspath(parent))
+    print("\nParent123123 Directory:", os.path.abspath(os.path.join(path, os.pardir)))
