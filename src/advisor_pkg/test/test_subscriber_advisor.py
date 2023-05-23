@@ -27,7 +27,6 @@ def generate_test_description():
         parameters=[{
             'air_traffic_sub_param' : 'air_traffic_listener',
             'air_traffic_new_pub_param' : 'air_traffic_new_talker',
-            'drone_new_pub_param': 'drone_new_talker'
         }]
     )
 

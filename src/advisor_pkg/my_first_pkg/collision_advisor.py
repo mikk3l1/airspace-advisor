@@ -30,8 +30,8 @@ class CollisionSubscriber(Node):
         super().__init__('advisor_node')
 
 
-        self.declare_parameter('dron_new_sub_param', value='/air_traffic_new_coordinates')
-        air_traffic_new_sub_name = self.get_parameter('dron_new_sub_param').get_parameter_value().string_value
+        self.declare_parameter('air_traffic_new_sub_param', value='/air_traffic_new_coordinates')
+        air_traffic_new_sub_name = self.get_parameter('air_traffic_new_sub_param').get_parameter_value().string_value
 
         self.declare_parameter('drone_new_sub_param', value='/drone_new_coordinates')
         sub_drone_new_name = self.get_parameter('drone_new_sub_param').get_parameter_value().string_value
@@ -39,7 +39,6 @@ class CollisionSubscriber(Node):
         self.declare_parameter('publish_topic', value='/advisor_topic')
         publish_advisor_name = self.get_parameter('publish_topic').get_parameter_value().string_value
 
-        
         
         # Subscriber to get the drones mission waypoints
         self.WaypointList_subscription = self.create_subscription(
