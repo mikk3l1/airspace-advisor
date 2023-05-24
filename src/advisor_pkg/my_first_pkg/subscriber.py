@@ -104,7 +104,7 @@ class MinimalSubscriber(Node):
         self.drone_info['speed_in_cm'] = GPSRAW_msg.vel
 
     def compass_hdg_callback(self, compass_hdg_msg):
-        self.get_logger().info(f'received: \n{compass_hdg_msg.data}, {compass_hdg_msg.data}')
+        self.get_logger().info(f'received: \n{compass_hdg_msg.data}')
         self.drone_info['heading'] = compass_hdg_msg.data
         self.drone_info['track'] = compass_hdg_msg.data
 
