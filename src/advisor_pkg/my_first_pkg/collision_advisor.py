@@ -82,7 +82,7 @@ class CollisionSubscriber(Node):
         self.waypoints_list = []
 
     def WaypointList_callback(self, waypoints_msg):
-        self.get_logger().info(f'WaypointList received: \n{waypoints_msg.data}')
+        self.get_logger().info(f'WaypointList received: \n{waypoints_msg}')
         self.waypoints_list = []
         for wayPoint in waypoints_msg.waypoints:
             self.waypoints_list.append([wayPoint.x_lat,wayPoint.y_long,wayPoint.z_alt])

@@ -31,7 +31,7 @@ class MinimalSubscriber(Node):
         air_traffic_new_pub_name = self.get_parameter('air_traffic_new_pub_param').get_parameter_value().string_value
 
         self.declare_parameter('drone_new_pub_param', value='/drone_new_coordinates')
-        drone_new_pub_name = self.get_parameter('air_traffic_new_pub_param').get_parameter_value().string_value
+        drone_new_pub_name = self.get_parameter('drone_new_pub_param').get_parameter_value().string_value
         
 
         
