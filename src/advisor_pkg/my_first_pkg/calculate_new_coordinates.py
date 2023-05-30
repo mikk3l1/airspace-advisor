@@ -19,9 +19,9 @@ def calculate_new_coordinates_using_nautical_miles(aircraft: dict, time: float =
     lon = float(aircraft['lon'])
 
     if aircraft.get('baro_alt') == None:
-        altitude = aircraft['alt']
+        altitude = float(aircraft['alt'])
     else:
-        altitude = aircraft['baro_alt']
+        altitude = float(aircraft['baro_alt'])
 
     track = float(aircraft['track'])
     speed = float(aircraft['speed'])

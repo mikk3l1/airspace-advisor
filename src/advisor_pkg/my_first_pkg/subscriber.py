@@ -92,19 +92,19 @@ class MinimalSubscriber(Node):
         self.air_traffic = json.loads(air_traffic_msg.data)
 
     def NavSatFix_callback(self, NavSatFix_msg):
-        self.get_logger().info(f'received: \n{NavSatFix_msg.latitude}, {NavSatFix_msg.longitude}, {NavSatFix_msg.altitude}')
+        # self.get_logger().info(f'received: \n{NavSatFix_msg.latitude}, {NavSatFix_msg.longitude}, {NavSatFix_msg.altitude}')
         self.drone_info['lat'] = NavSatFix_msg.latitude
         self.drone_info['lon'] = NavSatFix_msg.longitude
         self.drone_info['alt'] = NavSatFix_msg.altitude
 
     def GPSRAW_callback(self, GPSRAW_msg):
-        self.get_logger().info(f'received: \n{GPSRAW_msg.vel}')
+        # self.get_logger().info(f'received: \n{GPSRAW_msg.vel}')
         drone_speed_in_knots = GPSRAW_msg.vel * 0.01944   # convert cm/s to knots
         self.drone_info['speed'] = drone_speed_in_knots
         self.drone_info['speed_in_cm'] = GPSRAW_msg.vel
 
     def compass_hdg_callback(self, compass_hdg_msg):
-        self.get_logger().info(f'received: \n{compass_hdg_msg.data}')
+        # self.get_logger().info(f'received: \n{compass_hdg_msg.data}')
         self.drone_info['heading'] = compass_hdg_msg.data
         self.drone_info['track'] = compass_hdg_msg.data
 
