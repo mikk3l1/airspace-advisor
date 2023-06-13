@@ -12,6 +12,7 @@ sys.path.append('../advisor_pkg')
 
 from my_first_pkg.calculate_collision_risk import calc_mission_collision
 from my_first_pkg.calculate_collision_risk import calc_drone_aircraft_collision
+from my_first_pkg.calculate_collision_risk import calc_collision_time_drone_aircraft
 
 # from .calculate_collision_risk import calc_mission_collision
 # from .calculate_collision_risk import calc_drone_aircraft_collision
@@ -23,9 +24,7 @@ from my_first_pkg.advisor_log_text_req import get_data, post_test, post_url
 # from .advisor_log_text_req import post_url
 
 
-
 class CollisionSubscriber(Node):
-
     def __init__(self):
         super().__init__('advisor_node')
 
@@ -82,19 +81,19 @@ class CollisionSubscriber(Node):
         self.waypoints_list = []
 
     def WaypointList_callback(self, waypoints_msg):
-        self.get_logger().info(f'WaypointList received: \n{waypoints_msg}')
+        # self.get_logger().info(f'WaypointList received: \n{waypoints_msg}')
         self.waypoints_list = []
         for wayPoint in waypoints_msg.waypoints:
             self.waypoints_list.append([wayPoint.x_lat,wayPoint.y_long,wayPoint.z_alt])
             # self.get_logger().info(f'I heard:\nlat:{wayPoint.x_lat}\nlong:{wayPoint.y_long}\nalt:{wayPoint.z_alt}')
         
     def air_traffic_new_coordinates_callback(self, air_traffic_new_coordinates_msg):
-        self.get_logger().info(f'air_traffic_new_coordinates received: \n{air_traffic_new_coordinates_msg.data}')
+        # self.get_logger().info(f'air_traffic_new_coordinates received: \n{air_traffic_new_coordinates_msg.data}')
         self.air_traffic_dict = json.loads(air_traffic_new_coordinates_msg.data)
         # self.get_logger().info(f'I heard:\n {json.dumps(self.air_traffic_dict, indent=1)}')
 
     def drone_new_callback(self, drone_new_coordinates_msg):
-        self.get_logger().info(f'drone_new received: \n{drone_new_coordinates_msg.data}')
+        # self.get_logger().info(f'drone_new received: \n{drone_new_coordinates_msg.data}')
         self.drone_dict = json.loads(drone_new_coordinates_msg.data)
         # self.get_logger().info(f'I heard:\n {json.dumps(self.drone_dict, indent=1)}')
 
@@ -102,31 +101,59 @@ class CollisionSubscriber(Node):
     def publish_to_advisor_thread(self):
         msg = String()
 
-        if self.air_traffic_dict and self.waypoints_list:
-            mission_collision = calc_mission_collision(self.waypoints_list, self.air_traffic_dict)
-            post_test['level'] = mission_collision[0]
-            post_test['text'] = mission_collision[1]
-            self.get_logger().info(f'Mission:\nPOST to {post_url} with {post_test}')
-            get_data(post_url, post_test)
+        # if self.air_traffic_dict and self.waypoints_list:
+        #     mission_collision = calc_mission_collision(self.waypoints_list, self.air_traffic_dict)
+        #     post_test['level'] = mission_collision[0]
+        #     post_test['text'] = mission_collision[1]
+        #     self.get_logger().info(f'Mission:\nPOST to {post_url} with {post_test}')
+        #     get_data(post_url, post_test)
 
-        else:
-            if not self.air_traffic_dict:
-                self.get_logger().info(f'air_traffic_dict is empty')
-            else:
-                self.get_logger().info(f'self.waypoints_list is empty')
+        # else:
+        #     if not self.air_traffic_dict:
+        #         self.get_logger().info(f'air_traffic_dict is empty')
+        #     else:
+        #         self.get_logger().info(f'self.waypoints_list is empty')
+
+
+        # if self.air_traffic_dict and self.drone_dict and self.drone_dict['speed'] > 1:
+        #     aircraft_collision = calc_drone_aircraft_collision(self.drone_dict,self.air_traffic_dict)
+        #     post_test['level'] = aircraft_collision[0]
+        #     post_test['text'] = aircraft_collision[1]
+        #     self.get_logger().info(f'Drone-Aircraft:\nPOST to {post_url} with {post_test}')
+        #     get_data(post_url, post_test)
+        # else:
+        #     if not self.air_traffic_dict:
+        #         self.get_logger().info(f'air_traffic_dict is empty')
+        #     else:
+        #         self.get_logger().info(f'self.drone_dict is empty or drone is flying too slow')
+
 
         if self.air_traffic_dict and self.drone_dict and self.drone_dict['speed'] > 1:
-            aircraft_collision = calc_drone_aircraft_collision(self.drone_dict,self.air_traffic_dict)
-            post_test['level'] = aircraft_collision[0]
-            post_test['text'] = aircraft_collision[1]
-            self.get_logger().info(f'Drone-Aircraft:\nPOST to {post_url} with {post_test}')
-            get_data(post_url, post_test)
-        else:
-            if not self.air_traffic_dict:
-                self.get_logger().info(f'air_traffic_dict is empty')
-            else:
-                self.get_logger().info(f'self.drone_dict is empty or drone is flying too slow')
+            collision_dict = calc_collision_time_drone_aircraft(self.drone_dict, self.air_traffic_dict)
+            count = 0
 
+
+            # Iterate over the values in the dictionary
+            if all(len(value) == 0 for value in collision_dict.values()):
+                post_test['level'] = 'info'
+                post_test['text'] = f'No collision detected in the near future'
+                get_data(post_url, post_test)
+                print(post_test['text'])
+            else:
+                for key, value in collision_dict.items():
+                    if value and any(value):
+                        count += 1
+                        if key == '10' or key == '30':
+                            post_test['level'] = 'error'
+                        else:
+                            post_test['level'] = 'warn'
+                        # print(f"Careful! In {key} seconds, a collision between {', '.join(value)} and the drone can happen!")
+                        post_test['text'] = f"Careful! In {key} seconds, a collision between {', '.join(value)} and the drone can happen!"
+                        get_data(post_url, post_test)
+                        print(post_test['text'])
+                        if count == 3:
+                            break
+        
 
 
 def main(args=None):

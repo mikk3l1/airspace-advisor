@@ -51,7 +51,7 @@ def test_calc_mission_collision_without_collision():
     }
 
     result = calc_mission_collision(mission_waypoints, air_traffic_dict)
-    expected = ['info', 'No Aircraft(s) will collide with the mission waypoints']
+    expected = ['info', 'No Aircraft will collide with the mission waypoints']
     assert result == expected
 
 

@@ -124,6 +124,7 @@ class MinimalSubscriber(Node):
         msg = String()
         if self.drone_info:
             self.drone_info['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(self.drone_info)
+            print(self.drone_info['new_coordinates'])
             msg.data = json.dumps(self.drone_info, indent=1)
             self.drone_new_coordinates_publisher.publish(msg)
             self.get_logger().info(f'Publishing drone_info with new coordinates:\n{msg.data}')
