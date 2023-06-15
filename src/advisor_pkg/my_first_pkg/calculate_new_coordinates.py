@@ -19,8 +19,7 @@ def calculate_new_coordinates_using_nautical_miles(aircraft: dict, times: list =
     # Extract inputs from dictionary
     lat = float(aircraft['lat'])
     lon = float(aircraft['lon'])
-
-    print(aircraft)
+    
     if aircraft.get('baro_alt') == None:
         if aircraft.get('alt') == None:
             altitude = float(aircraft['gnss_alt'])

@@ -29,7 +29,7 @@ setup(
             'listener = my_first_pkg.subscriber:main',
             'collision_advisor = my_first_pkg.collision_advisor:main',
             'qgc_pub = my_first_pkg.air_traffic_to_qgc:main',
-            
+            'tts = my_first_pkg.tts_node:main'
         ],
     },
 )

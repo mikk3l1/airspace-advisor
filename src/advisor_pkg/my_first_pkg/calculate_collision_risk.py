@@ -55,6 +55,53 @@ def calc_drone_aircraft_collision(drone_dict: dict, air_traffic_dict: dict) -> l
         return ['info', f'No Aircraft will collide with the drone in the next 60 seconds']
 
 
+# TODO
+def calc_collision_time_mission_aircraft(mission_waypoints: list, air_traffic_dict: dict):
+    collision_aircraft_mission = dict()
+    
+    for index, waypoint in enumerate(mission_waypoints):
+        for flight, aircraft in air_traffic_dict.items():
+            for time, aircraft_coords in aircraft['new_coordinates'].items():
+                collision_aircraft_mission.setdefault(time, [])
+                waypoint_lat, waypoint_lon, _ = waypoint
+                aircraft_lat, aircraft_lon, _ = aircraft_coords
+
+                flag = False  
+
+                for lst in collision_aircraft_mission.values():
+                    if flight in lst:
+                        flag = True
+                        continue
+                if flag:
+                    continue # Skip the loop if the flight is detected to be in "colliding_aircraft" dict
+
+                distance = distance_between_objects((waypoint_lat, waypoint_lon), (aircraft_lat, aircraft_lon))
+                
+                # FFA well-clear
+                # 2_000 ft horizontal (0.6096 km)
+                # 600 ft vertical (182.88 meter)
+
+                # Check if the distance is below a certain threshold (e.g., 1 kilometer)
+                threshold = 1.0  # Adjust this value as needed
+                if distance < threshold:
+                    collision_aircraft_mission[time].append(flight)
+                    print(flight, time, index, waypoint)
+
+            #     # Collision detected!
+            #     print(f"Collision detected at waypoint {waypoint} with aircraft {aircraft['flight']} at time {time}")
+            #     break  # Exit the inner loop if a collision is detected
+            # else:
+            #     # No collision detected for the current waypoint
+            #     print(f"No collision at waypoint {waypoint}")
+    # print('------------------------------')
+    # print(collision_aircraft_mission)
+    # print('------------------------------')
+    return collision_aircraft_mission
+
+    # pass
+
+
+
 def calc_collision_time_drone_aircraft(drone_dict: dict, air_traffic_dict: dict):
     colliding_aircraft = dict()
     # flag = False
@@ -84,15 +131,16 @@ def calc_collision_time_drone_aircraft(drone_dict: dict, air_traffic_dict: dict)
             distance = distance_between_objects(
                 (drone_lat, drone_lon), (air_traffic_lat, air_traffic_lon))
 
-            # print(flight, distance, time)
+            # FFA well-clear
+            # 2_000 ft horizontal (0.6096 km)
+            # 600 ft vertical (182.88 meter)
+
             # Check if the distance is below a certain threshold (e.g., 1 kilometer)
-            threshold = 1.0  # Adjust this value as needed
+            threshold = 10.0  # Adjust this value as needed
             if distance < threshold:
                 colliding_aircraft[time].append(flight)
-                # print(f"Aircraft {flight} may collide with the drone at time {time}.")
-                # break  # Exit the loop after the first collision is detected
-    return colliding_aircraft
 
+    return colliding_aircraft
 
 
 if __name__ == '__main__':
