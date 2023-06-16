@@ -119,26 +119,29 @@ class CollisionSubscriber(Node):
         msg = String()
         if self.waypoints_list:
             mission_collision_dict = calc_collision_time_mission_aircraft(self.waypoints_list, self.air_traffic_dict)
+            count = 0
 # ------------------------------------------------------------------------------------------------------------------------------------------ TODO
             msg = String()
-            if all(len(value) == 0 for value in collision_dict.values()):
+            if all(len(value) == 0 for value in mission_collision_dict.values()):
                 post_test['level'] = 'info'
-                post_test['text'] = f'No collision detected in the near future'
+                post_test['text'] = f'MISSION: No collision detected in the near future'
                 get_data(post_url, post_test)
 
             else:
-                for key, value in collision_dict.items():
+                for key, value in mission_collision_dict.items():
                     if value and any(value):
                         count += 1
-                        if key == '10' or key == '30':
-                            post_test['level'] = 'error'
-                        else:
-                            post_test['level'] = 'warn'
+                        post_test['level'] = 'info'
+                        # if key == '10' or key == '30':
+                        #     post_test['level'] = 'error'
+                        # else:
+                        #     post_test['level'] = 'warn'
                         # print(f"Careful! In {key} seconds, a collision between {', '.join(value)} and the drone can happen!")
-                        post_test['text'] = f"Careful! In {key} seconds, a collision between {', '.join(value)} and the drone can happen!"
+                        post_test['text'] = f"MISSION: A collision between {', '.join(value)} and the drone mission waypoints can happen!"
                         get_data(post_url, post_test)
                         if count == 3:
                             break
+            
 # ------------------------------------------------------------------------------------------------------------------------------------------ TODO
             # print(self.waypoints_list)
             # collision_mission_dict = calc_collision_time_mission_aircraft(self.waypoints_list, self.air_traffic_dict)

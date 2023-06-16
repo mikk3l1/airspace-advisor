@@ -85,17 +85,8 @@ def calc_collision_time_mission_aircraft(mission_waypoints: list, air_traffic_di
                 threshold = 1.0  # Adjust this value as needed
                 if distance < threshold:
                     collision_aircraft_mission[time].append(flight)
-                    print(flight, time, index, waypoint)
+                    # print(flight, time, index, waypoint)
 
-            #     # Collision detected!
-            #     print(f"Collision detected at waypoint {waypoint} with aircraft {aircraft['flight']} at time {time}")
-            #     break  # Exit the inner loop if a collision is detected
-            # else:
-            #     # No collision detected for the current waypoint
-            #     print(f"No collision at waypoint {waypoint}")
-    # print('------------------------------')
-    # print(collision_aircraft_mission)
-    # print('------------------------------')
     return collision_aircraft_mission
 
     # pass
@@ -136,7 +127,7 @@ def calc_collision_time_drone_aircraft(drone_dict: dict, air_traffic_dict: dict)
             # 600 ft vertical (182.88 meter)
 
             # Check if the distance is below a certain threshold (e.g., 1 kilometer)
-            threshold = 10.0  # Adjust this value as needed
+            threshold = 1.0  # Adjust this value as needed
             if distance < threshold:
                 colliding_aircraft[time].append(flight)
 
