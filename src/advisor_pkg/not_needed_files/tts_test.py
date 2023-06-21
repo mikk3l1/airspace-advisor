@@ -28,12 +28,12 @@ tts = gTTS(text=text, lang='en')
 # Save the audio file
 tts.save("output.mp3")
 
-# Play the audio file
-playsound("output.mp3")
+# # Play the audio file
+# playsound("output.mp3")
 
 pygame.mixer.init()
 
-sound1 = pygame.mixer.Sound("output.mp3")
+sound1 = pygame.mixer.Sound("output1.mp3")
 sound2 = pygame.mixer.Sound("notification.mp3")
 
 

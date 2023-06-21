@@ -86,7 +86,7 @@ class CollisionSubscriber(Node):
 
     def WaypointList_callback(self, waypoints_msg):
         # self.get_logger().info(f'WaypointList received: \n{waypoints_msg}')
-        self.waypoints_list = []
+        # self.waypoints_list = []
         current_index = -1
         for i, waypoint in enumerate(waypoints_msg.waypoints):
             if waypoint.is_current:
@@ -209,6 +209,10 @@ class CollisionSubscriber(Node):
             post_test['level'] = 'info'
             post_test['text'] = f'Drone detected. Flying below 1 m/s'
             get_data(post_url, post_test)
+
+        self.drone_dict = {}
+        self.air_traffic_dict = {}
+        # self.waypoints_list = []
 
 
 

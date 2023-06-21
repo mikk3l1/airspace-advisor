@@ -15,7 +15,7 @@ def distance_between_objects(aircraft_lat_lon: list, drone_lat_lon: list) -> flo
 # times: list = [10, 30, 60, 120, 180, 300]
 # time: float = 60.0
 
-def calculate_new_coordinates_using_nautical_miles(aircraft: dict, times: list = [10, 30, 60, 120, 180, 300]):
+def calculate_new_coordinates_using_nautical_miles(aircraft: dict, times: list = [10, 30, 60, 120, 180, 300], time: float = 60.0):
     # Extract inputs from dictionary
     lat = float(aircraft['lat'])
     lon = float(aircraft['lon'])
@@ -82,16 +82,27 @@ def calculate_new_coordinates_using_nautical_miles(aircraft: dict, times: list =
 if __name__ == '__main__':
 
     aircraft = {
-        'lat': 37.7749,
-        'lon': -122.4194,
-        'alt': 10000,
-        'track': 94,
-        'speed': 400
+            "baro_alt": 40997,
+            "flight": "FIN7KL",
+            "gnss_alt": 0,
+            "icao_id": "461F55",
+            "lat": "55.80501",
+            "lon": "11.04444",
+            "seen": 31.172,
+            "sim": "false",
+            "source_name": "Unknown",
+            "source_type": "ADSB",
+            "speed": 511,
+            "target_dir": 51,
+            "target_dist": 58066,
+            "track": 53,
     }
 
-    times = [10, 20, 30, 60, 120, 300]
+    times = [10, 30, 60, 120,180, 300]
     new_coords = calculate_new_coordinates_using_nautical_miles(aircraft, times)
+    aircraft['new_coordinates'] = calculate_new_coordinates_using_nautical_miles(aircraft, times)
     print(new_coords)
+    print(aircraft)
 
     # aircraft1 = {'lat': 55.5074, 'lon': -10.1278, 'alt': 200, 'track': 10, 'speed': 500}
     # aircraft2 = {'lat': 80.5018, 'lon': -90.1278, 'baro_alt': 5000, 'track': 65, 'speed': 200}

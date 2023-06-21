@@ -53,7 +53,10 @@ class MinimalSubscriber(Node):
             pygame.mixer.init()
 
             sound1 = pygame.mixer.Sound("output.mp3")
-            sound2 = pygame.mixer.Sound("notification.mp3")
+            if 'info' in x:
+                sound2 = pygame.mixer.Sound("notification.mp3")
+            else:
+                sound2 = pygame.mixer.Sound("alarm.mp3")
 
             sound1.play()
             sound2.play()
